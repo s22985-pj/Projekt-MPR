@@ -2,6 +2,7 @@ package com.example.Piotr.User;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 // Dodawanie metod
@@ -75,9 +76,9 @@ public class UserService {
         else user.setAge(age);
     }
 
-    public User getUser(String name, String surName, String userName){
+    public User createUser(String name, String surName, String userName){
         User user = new User(name ,surName, userName,"Zelkowski@domena.pl","123456", 20);
-        return user;
+        return userRepository.save(user);
     }
 
     public User FindById(Long id){
@@ -87,7 +88,9 @@ public class UserService {
         }else throw new IllegalArgumentException("Brak ID");
     }
 
-
+    public List<User> ListUsers(){
+        return userRepository.findAll();
+    }
 
 }
 

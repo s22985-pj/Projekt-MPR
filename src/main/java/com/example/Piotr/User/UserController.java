@@ -2,9 +2,9 @@ package com.example.Piotr.User;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController // Zwraca dane do klienta - wyświetlanie danych
 @RequestMapping(path = "/users")
@@ -19,13 +19,18 @@ public class UserController {
         return ResponseEntity.ok("It works");
 
     } // ResponseEntity
-    @GetMapping("/test")
-    public ResponseEntity<User> getUser(String name, String surName, String userName) {
-        return ResponseEntity.ok(userService.getUser(name,surName,userName));
+    @GetMapping("/createUser")
+    public ResponseEntity<User> createUser(@RequestParam String name,@RequestParam String surName,@RequestParam String userName) {
+        return ResponseEntity.ok(userService.createUser(name,surName,userName));
     }
 
     @GetMapping("/getUser/{id}")
-    public ResponseEntity<User> getUserById(Long id) {
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.FindById(id));
+    }
+
+    @GetMapping("/getAll")
+    public List<User> ListUsers(){
+        return userService.ListUsers();
     }
 }

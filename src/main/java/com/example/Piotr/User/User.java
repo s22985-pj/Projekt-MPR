@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
@@ -26,6 +27,8 @@ public class User {
         this.password = password;
         this.age = age;
     }
+
+    public User(){}
 
     public Long getId() {
         return id;
